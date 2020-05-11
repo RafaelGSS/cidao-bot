@@ -1,4 +1,5 @@
 import { Client as DiscordClient } from 'discord.js';
+import { ReadyActionService } from './services/readyActionService';
 import { BotAction } from './botAction';
 
 type BotConfig = {
@@ -12,9 +13,11 @@ export class Bot {
 
   private config: BotConfig;
 
-  // TODO: send actions and make factory
-  constructor(config: BotConfig, actions: BotAction[]) {
+  constructor(config: BotConfig) {
     this.client = new DiscordClient();
+    this.botActions = [
+      new ReadyActionService(),
+    ]
     this.config = config;
   }
 

@@ -3,7 +3,7 @@ import { Client as DiscordClient } from 'discord.js';
 import { BotAction } from '../botAction';
 import { ConsoleLogger } from '../../infra/log/consoleLogger';
 
-export class ReadActionService implements BotAction {
+export class ReadyActionService implements BotAction {
   public bind(client: DiscordClient): void {
     client.on('ready', () => {
        ConsoleLogger.instance.info('Ready Action!');
