@@ -1,8 +1,8 @@
 import { Client as DiscordClient } from 'discord.js';
-import { ReadyActionService } from './services/readyActionService';
-import { PingActionService } from './services/pingActionService';
 import { BotAction } from './botAction';
-import { ReplyActionService } from './services/replyActionService';
+import { ReadyAction } from './actions/readyAction';
+import { PingAction } from './actions/pingAction';
+import { HuffAction } from './actions/huffAction';
 
 type BotConfig = {
   discordCfg: { token: string },
@@ -18,10 +18,10 @@ export class Bot {
   constructor(config: BotConfig) {
     this.client = new DiscordClient();
     this.botActions = [
-      new ReadyActionService(),
-      new PingActionService(),
-      new ReplyActionService(),
-    ]
+      new ReadyAction(), // Should be first
+      new PingAction(),
+      new HuffAction(),
+    ];
     this.config = config;
   }
 
