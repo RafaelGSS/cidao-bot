@@ -12,15 +12,15 @@ export class ConsoleLogger implements Logger {
     return ConsoleLogger.instanceLogger;
   }
 
-  public info(message: string): void {
-    console.info(message);
+  public info(message: any, context?: string): void {
+    console.info(`[${context}] ${message}`);
   }
 
-  public warn(message: string): void {
-    console.warn(message);
+  public warn(message: any, context?: string): void {
+    console.warn(`[${context}] ${message}`);
   }
 
-  public error(message: string): void {
-    console.error(message);
+  public error(message: any, context?: string): void {
+    console.error(`[${context}] ${message}`);
   }
 }
