@@ -2,17 +2,20 @@
   "name": "cidao-bot",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "ts-node src/main.ts"
+    "dev": "ts-node src/main.ts",
+    "si": "nodemon --inspect ./node_modules/.bin/ts-node src/main.ts",
+    "sib": "nodemon --inspect-brk ./node_modules/.bin/ts-node src/main.ts"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Gonzaga Access",
+  "license": "MIT",
   "dependencies": {
     "discord.js": "^12.2.0",
-    "dotenv": "^8.2.0"
+    "dotenv": "^8.2.0",
+    "ffmpeg-static": "^4.2.1"
   },
   "devDependencies": {
     "@types/node": "^13.13.5",
@@ -21,6 +24,7 @@
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-import": "^2.20.2",
+    "nodemon": "^2.0.4",
     "ts-node": "^8.9.1",
     "typescript": "^3.8.3"
   }
