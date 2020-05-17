@@ -1,6 +1,6 @@
 {
   "name": "cidao-bot",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
   "main": "src/main.js",
   "scripts": {
@@ -13,6 +13,7 @@
   "author": "Gonzaga Access",
   "license": "MIT",
   "dependencies": {
+    "@discordjs/opus": "^0.3.2",
     "discord.js": "^12.2.0",
     "dotenv": "^8.2.0",
     "ffmpeg-static": "^4.2.1"

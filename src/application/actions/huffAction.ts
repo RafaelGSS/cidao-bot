@@ -20,13 +20,14 @@ export class HuffAction implements BotAction {
       const dispatcher = connection.play(path.join(__dirname, '../../resources/gui.ogg'));
 
       dispatcher.on('finish', () => {
+        channel.leave();
         ConsoleLogger.instance.info('Finished display huff', this.constructor.name);
-      })
+      });
     }, 10000);
   }
 
   private getChannelToJoin(): VoiceChannel {
-    const channel = this.channelService.getChannelByName('PB');
+    const channel = this.channelService.getChannelByName('VALORANT');
     return channel;
   }
 
