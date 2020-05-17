@@ -1,38 +1,67 @@
+import { HuffService } from 'application/services/huffService';
 import { Client as DiscordClient, VoiceChannel } from 'discord.js';
+import * as path from 'path';
+import { ConsoleLogger } from '../../infra/log/consoleLogger';
 import { BotAction } from '../botAction';
 import { ChannelService } from '../services/channelService';
-import { ConsoleLogger } from '../../infra/log/consoleLogger';
-import * as path from 'path';
 
 export class HuffAction implements BotAction {
   private channelService: ChannelService;
 
-  public bind(client: DiscordClient): void {
+  private huffService: HuffService;
+
+  public async bind(client: DiscordClient): Promise<void> {
     this.channelService = new ChannelService(client);
+    this.huffService = new HuffService();
+    await this.huffService.initialize(path.join(__dirname, '../../resources'));
+
+    this.scheduleHuff(this.generateNextHuff());
+  }
+
+  private scheduleHuff(milliseconds: number): void {
+    ConsoleLogger.instance.info(`Scheduling huff at ${milliseconds} ms`, this.constructor.name);
+
     setTimeout(async () => {
       const channel = this.getChannelToJoin();
       if (!channel) {
-        ConsoleLogger.instance.warn('Channel not found', this.constructor.name);
-        return;
+        ConsoleLogger.instance.warn('Available channel not found', this.constructor.name);
+      } else {
+        ConsoleLogger.instance.info('Displaying huff...', this.constructor.name);
+        const huff = this.getNextHuff();
+        await this.huffOnChannel(channel, huff);
       }
+      this.scheduleHuff(this.generateNextHuff());
+    }, milliseconds);
+  }
 
-      const connection = await channel.join();
-      const dispatcher = connection.play(path.join(__dirname, '../../resources/gui.ogg'));
+  private async huffOnChannel(channel: VoiceChannel, huff: string): Promise<void> {
+    const connection = await channel.join();
+    const dispatcher = connection.play(huff);
 
+    return new Promise((resolve, reject) => {
       dispatcher.on('finish', () => {
-        channel.leave();
         ConsoleLogger.instance.info('Finished display huff', this.constructor.name);
+        channel.leave();
+        resolve();
       });
-    }, 10000);
+
+      dispatcher.on('error', reject);
+    });
   }
 
   private getChannelToJoin(): VoiceChannel {
-    const channel = this.channelService.getChannelByName('VALORANT');
+    const [channel] = this.channelService
+      .getChannelWithMembers()
+      .sort((a, b) => (a.members.size > b.members.size ? 1 : -1));
     return channel;
   }
 
-  private generateNextHuff(): Date {
-    const nextTime = 5 * 60000;
-    return new Date(new Date().getTime() + nextTime);
+  private getNextHuff(): string {
+    const huffs = this.huffService.getHuffs();
+    return huffs[Math.floor(Math.random() * huffs.length)];
+  }
+
+  private generateNextHuff(): number {
+    return 10 * 60000;
   }
 }
