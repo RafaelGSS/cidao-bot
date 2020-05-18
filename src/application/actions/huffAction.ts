@@ -1,9 +1,9 @@
-import { HuffService } from 'application/services/huffService';
 import { Client as DiscordClient, VoiceChannel } from 'discord.js';
 import * as path from 'path';
 import { ConsoleLogger } from '../../infra/log/consoleLogger';
 import { BotAction } from '../botAction';
 import { ChannelService } from '../services/channelService';
+import { HuffService } from '../services/huffService';
 
 export class HuffAction implements BotAction {
   private channelService: ChannelService;

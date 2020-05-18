@@ -1,5 +1,5 @@
 import { Client as DiscordClient } from 'discord.js';
-import { ConsoleLogger } from 'infra/log/consoleLogger';
+import { ConsoleLogger } from '../../infra/log/consoleLogger';
 import { BotAction } from '../botAction';
 
 export class PingAction implements BotAction {
