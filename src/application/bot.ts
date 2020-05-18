@@ -5,7 +5,7 @@ import { PingAction } from './actions/pingAction';
 import { HuffAction } from './actions/huffAction';
 
 type BotConfig = {
-  discordCfg: { token: string },
+  discordCfg: { token: string };
 };
 
 export class Bot {

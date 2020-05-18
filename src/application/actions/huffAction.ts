@@ -10,6 +10,8 @@ export class HuffAction implements BotAction {
 
   private huffService: HuffService;
 
+  private lastHuffIndex = 0;
+
   public async bind(client: DiscordClient): Promise<void> {
     this.channelService = new ChannelService(client);
     this.huffService = new HuffService();
@@ -58,7 +60,10 @@ export class HuffAction implements BotAction {
 
   private getNextHuff(): string {
     const huffs = this.huffService.getHuffs();
-    return huffs[Math.floor(Math.random() * huffs.length)];
+    if (this.lastHuffIndex >= huffs.length) {
+      this.lastHuffIndex = 0;
+    }
+    return huffs[this.lastHuffIndex];
   }
 
   private generateNextHuff(): number {
