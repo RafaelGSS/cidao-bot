@@ -63,10 +63,12 @@ export class HuffAction implements BotAction {
     if (this.lastHuffIndex >= huffs.length) {
       this.lastHuffIndex = 0;
     }
-    return huffs[this.lastHuffIndex];
+    const huffIndex = this.lastHuffIndex;
+    this.lastHuffIndex += 1;
+    return huffs[huffIndex];
   }
 
   private generateNextHuff(): number {
-    return 10 * 60000;
+    return 30 * 60000;
   }
 }
