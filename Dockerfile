@@ -36,8 +36,6 @@ COPY --from=build $BUILD_DIR/dist $APP_DIR
 COPY package.json $APP_DIR
 COPY src/resources $APP_DIR/src/resources
 
-RUN ls -la $APP_DIR
-
 WORKDIR $APP_DIR
 
 RUN npm install --production --silent
