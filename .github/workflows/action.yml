@@ -1,0 +1,41 @@
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: Build, push
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@master
+
+      - name: Build container image
+        run: docker build -t rafaelgss/projects:cidao-bot-latest .
+
+      - name: Docker login
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+
+      - name: Push image to Docker Hub
+        run: docker push rafaelgss/projects
+
+  deploy:
+    needs: build
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: executing remote ssh commands using key
+        uses: appleboy/ssh-action@master
+        env:
+          DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+        with:
+          envs: DISCORD_BOT_TOKEN
+          script: |
+            docker pull rafaelgss/projects:cidao-bot-latest
+            docker kill cidao-bot-latest
+            docker rm blog_prod
+            docker run -d --name cida-bot-latest -e DISCORD_BOT_TOKEN="$DISCORD_BOT_TOKEN" -t rafaelgss/projects:cidao-bot-latest

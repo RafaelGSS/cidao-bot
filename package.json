@@ -1,7 +1,7 @@
 {
   "name": "cidao-bot",
-  "version": "0.0.1",
-  "description": "",
+  "version": "1.0.1",
+  "description": "The Heleno son, created to have fun with Discord clients",
   "main": "src/main.js",
   "scripts": {
     "build": "tsc -p .",
@@ -11,8 +11,8 @@
     "si": "nodemon --inspect -r tsconfig-paths/register ./node_modules/.bin/ts-node src/main.ts",
     "sib": "nodemon --inspect-brk -r tsconfig-paths/register ./node_modules/.bin/ts-node src/main.ts"
   },
-  "keywords": [],
-  "author": "Gonzaga Access",
+  "keywords": ["discord", "bot"],
+  "author": "RafaelGSS",
   "license": "MIT",
   "dependencies": {
     "@discordjs/opus": "^0.3.2",
