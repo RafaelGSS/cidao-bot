@@ -3,6 +3,7 @@ import { BotAction } from './botAction';
 import { ReadyAction } from './actions/readyAction';
 import { PingAction } from './actions/pingAction';
 import { HuffAction } from './actions/huffAction';
+import { KdAction } from './actions/kdAction';
 
 type BotConfig = {
   discordCfg: { token: string };
@@ -21,6 +22,7 @@ export class Bot {
       new ReadyAction(), // Should be first
       new PingAction(),
       new HuffAction(),
+      new KdAction(),
     ];
     this.config = config;
   }
