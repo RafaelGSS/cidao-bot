@@ -1,6 +1,6 @@
 # cidao-bot
 
-The Heleno son, created to have fun with Discord clients
+The Heleno son, created to have fun with Discord clients.
 
 ## Installation
 
