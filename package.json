@@ -9,9 +9,13 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "ts-node -r tsconfig-paths/register src/main.ts",
     "si": "nodemon --inspect -r tsconfig-paths/register ./node_modules/.bin/ts-node src/main.ts",
+    "i": "node inspect -r tsconfig-paths/register ./node_modules/.bin/ts-node src/main.ts",
     "sib": "nodemon --inspect-brk -r tsconfig-paths/register ./node_modules/.bin/ts-node src/main.ts"
   },
-  "keywords": ["discord", "bot"],
+  "keywords": [
+    "discord",
+    "bot"
+  ],
   "author": "RafaelGSS",
   "license": "MIT",
   "dependencies": {

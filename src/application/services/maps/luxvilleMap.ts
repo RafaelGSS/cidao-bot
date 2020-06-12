@@ -1,4 +1,5 @@
 import { Map } from './map';
+import { fromResource } from '../../../resources';
 
 export class LuxvilleMap implements Map {
   getName(): string {
@@ -6,6 +7,9 @@ export class LuxvilleMap implements Map {
   }
 
   getRespawn(): string[] {
-    return ['downtown-ct.jpeg', 'downtown-tr.jpeg'];
+    return [
+      fromResource('luxville-ct.jpeg'),
+      fromResource('luxville-tr.jpeg'),
+    ];
   }
 }

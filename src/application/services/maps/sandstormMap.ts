@@ -1,4 +1,5 @@
 import { Map } from './map';
+import { fromResource } from '../../../resources';
 
 export class SandstormMap implements Map {
   getName(): string {
@@ -6,6 +7,9 @@ export class SandstormMap implements Map {
   }
 
   getRespawn(): string[] {
-    return ['downtown-ct.jpeg', 'downtown-tr.jpeg'];
+    return [
+      fromResource('sandstorm-ct.jpeg'),
+      fromResource('sandstorm-tr.jpeg'),
+    ];
   }
 }
