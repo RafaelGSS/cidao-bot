@@ -33,14 +33,14 @@ jobs:
         env:
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-      with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        key: ${{ secrets.key }}
-        port: ${{ secrets.PORT }}
-        envs: DISCORD_BOT_TOKEN
-        script: |
-          docker pull rafaelgss/projects:cidao-bot-latest
-          docker kill cidao-bot-latest
-          docker rm blog_prod
-          docker run -d --name cida-bot-latest -e DISCORD_BOT_TOKEN="$DISCORD_BOT_TOKEN" -t rafaelgss/projects:cidao-bot-latest
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.key }}
+          port: ${{ secrets.PORT }}
+          envs: DISCORD_BOT_TOKEN
+          script: |
+            docker pull rafaelgss/projects:cidao-bot-latest
+            docker kill cidao-bot-latest
+            docker rm blog_prod
+            docker run -d --name cida-bot-latest -e DISCORD_BOT_TOKEN="$DISCORD_BOT_TOKEN" -t rafaelgss/projects:cidao-bot-latest
