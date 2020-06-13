@@ -30,16 +30,13 @@ jobs:
     steps:
 
     - name: executing remote ssh commands using key
-      uses: appleboy/ssh-action@master
+      uses: JimCronqvist/action-ssh@master
       env:
         DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
       with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        key: ${{ secrets.key }}
-        port: ${{ secrets.PORT }}
-        envs: DISCORD_BOT_TOKEN
-        script: |
+        hosts: ${{ secrets.HOSTS }}
+        privateKey: ${{ secrets.KEY }}
+        command: |
           docker pull rafaelgss/projects:cidao-bot-latest
           docker kill cidao-bot-latest
           docker rm cidao-bot-latest
