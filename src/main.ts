@@ -1,7 +1,7 @@
 import { config } from 'dotenv';
 config();
-import { Bot } from './application/bot';
 import discordCfg from './config/discord';
+import { Bot } from './application/bot';
 
 function main() {
   const bot = new Bot({ discordCfg });
